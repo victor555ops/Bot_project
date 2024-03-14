@@ -26,5 +26,8 @@ Para entender un poco de este apartado para ejecutar este codigo necesitamos alg
 
 
 ![Captura de pantalla 2024-03-14 114923](https://github.com/victor555ops/Bot_project/assets/150841434/7fff6c60-b4d9-4ce7-86cb-e751eee63221)
+
+
+
 **De esta forma asi deberia de estar**
 
