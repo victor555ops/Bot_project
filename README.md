@@ -1,8 +1,8 @@
-# Bot_project 😶‍🌫️
+# BotAssist 😶‍🌫️
 Nuestro repositorio esta constituido en un asistente como tal para ayudar a todas esas personas que no pueden usar la computadora, a lo largo de los años nosotros como esta edad podemos usar una computadora facil, ya sea por tutoriales, cursos, consejos de amigos etc, uno como programador puede hacer muchas cosas interesantes y eso es lo que hicimos nuestro equipo y yo para eso le damos una introduccion a nuestro codigo.
 
 Este proyecto se llama como tal :
-> Bot_Project 🍕
+> BotAssist 🍕
 
 ## Introduccion de Nuestro codigo 🐢
 **En este apartado es una pequeña informacion de lo que consiste nuestro codigo, en este caso puede hacer multitareas como tal, Por ejemplo:**
@@ -15,7 +15,7 @@ Este proyecto se llama como tal :
 - Para terminar tambien puede lo que es abrir las aplicaciones de Office como, Word, Excel, PowerPoint
 
 
-### Instalacion de Paquetes 
+### CMD Y librerias 👻
 
 Para entender un poco de este apartado para ejecutar este codigo necesitamos algunas librerias instaladas en nuestro cmd, para esto podemos hacer algo muy sencillo para esto podemos usar este comando de windows para entrar al cmd.
  `windows + r`
@@ -30,4 +30,19 @@ Para entender un poco de este apartado para ejecutar este codigo necesitamos alg
 
 
 **De esta forma asi deberia de estar**
+
+
+Y ya despues nos redesplegara la ventana de cmd en el cual instalaremos las liberias importantes para poder ejecutar este codigo que se llama **BotAssist** que se muestra a continuacion:
+
+![Captura de pantalla 2024-03-14 115427](https://github.com/victor555ops/Bot_project/assets/150841434/c483c8e7-7944-4f30-83d2-af5f6034b893)
+
+
+
+***Es importante que no a todos les saldran lo mismo como lo que son en torno a MAC***
+
+
+
+
+#### Instalacion de las librerias 👽
+
 
