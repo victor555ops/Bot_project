@@ -43,6 +43,16 @@ Y ya despues nos redesplegara la ventana de cmd en el cual instalaremos las libe
 
 
 
-#### Instalacion de las librerias 👽
+# Instalacion de las librerias 👽
 
+ ***Tenemos algunas liberias importadas en nuestro codigo y se requiere estas librerias para que no tengamos ningun error a la hora de ejecutar***
 
+ 
+ `pip install tkinter`
+
+Para entender un poco de contexto **Tkinter** es una liberia de interfaz grafica es la interfaz por defecto de Python para el kit de herramientas de GUI Tk. Tanto Tk como tkinter están disponibles en la mayoría de las plataformas Unix, así como en sistemas Windows (Tk en sí no es parte de Python, es mantenido por ActiveState).
+
+***Es importante tener esto en cuenta para la instalacion***
+
+Ejecutar python -m tkinter desde la línea de comandos debería abrir una ventana que demuestre una interfaz Tk simple para saber si tkinter está instalado correctamente en su sistema. También muestra qué versión de Tcl/Tk está instalada para que pueda leer la documentación de Tcl/Tk específica de esa versión.
+ 
