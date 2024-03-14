@@ -5,7 +5,7 @@ Este proyecto se llama como tal :
 > Bot_Project 🍕
 
 ## Introduccion de Nuestro codigo 🐢
-** En este apartado es una pequeña informacion de lo que consiste nuestro codigo, en este caso puede hacer multitareas como tal, Por ejemplo:
+** En este apartado es una pequeña informacion de lo que consiste nuestro codigo, en este caso puede hacer multitareas como tal, Por ejemplo: **
 
 - Nosotros podemos decirle que pueda buscar algo en google una cosa en especifica y lo hace.
 - Tambien puede abrir redes sociales ya sea, instagram, facebook, twitter, tiktok, entre otras y todo desde la busqueda de google.
