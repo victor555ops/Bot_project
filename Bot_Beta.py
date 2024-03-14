@@ -1,19 +1,14 @@
-import speech_recognition as sr
+import speech_recognition as sr 
 import webbrowser
 import tkinter as tk
 import pyttsx3
 import datetime 
 import requests 
-import json 
 import sys 
-import subprocess
 import pywhatkit
 import os
 from PIL import ImageTk, Image
-
-edad_bot = 1
-nombre_bot = 2
-respuesta = 3
+import time
 
 r = sr.Recognizer()
 engine = pyttsx3.init()
@@ -21,27 +16,28 @@ engine = pyttsx3.init()
 engine.setProperty("language", "es-ES")
 engine.setProperty("rate", 145)
 
+
 def obtener_hora():
-  
   hora = datetime.datetime.now().time()
- 
-  hora_str = hora.strftime("%H:%M")
-  
+
+  hora_str = hora.strftime("%I:%M %p")
   return hora_str
 
+print(obtener_hora())
 
 
 def abrir_segunda():
-    
   ventana.withdraw()
   
   ventana_segunda = tk.Toplevel()
   ventana_segunda.title("Segunda ventana")
-  ventana.configure(bg="")
   ventana_segunda.geometry("550x300")
-  imagen2 = Image.open("paisaje.jpg")
+  imagen2 = Image.open("Sabana.jpg")
 
   foto2 = ImageTk.PhotoImage(imagen2)
+  
+  marco = tk.Frame(ventana)
+  marco.pack()
   
   etiqueta = tk.Label(marco, image=foto2)
   etiqueta.pack()
@@ -52,15 +48,14 @@ def abrir_segunda():
   boton_2 = tk.Button(ventana_segunda, text="Volver a la primera ventana", command=lambda: volver_primera(ventana, ventana_segunda))
   boton_2.pack()
 
-def volver_primera(ventana, ventana_segunda):
-    
+
+def volver_primera(ventana, ventana_segunda): 
   ventana.deiconify()
   ventana_segunda.destroy()
 
 
 
 def obtener_fecha():
-  
   fecha = datetime.datetime.now().date()
   fecha_str = fecha.strftime("%d/%m/%Y")
   return fecha_str
@@ -69,11 +64,6 @@ def obtener_fecha():
 def abrir_explorador():
   os.startfile("explorer.exe")
 
-
-def abrir_youtube():
-  brave = "C:/Program Files (x86)/BraveSoftware/Brave-Browser/Application/brave.exe %s"
-  youtube = "https://www.youtube.com/"
-  webbrowser.get(brave).open(youtube)
   
 def crear_carpeta(nombre):
   escritorio = os.path.join(os.path.join(os.environ['USERPROFILE']), 'desktop')
@@ -83,7 +73,6 @@ def crear_carpeta(nombre):
   
   
 def abrir_carpeta(nombre):
-  
   carpeta = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop', nombre)
   
   if os.path.exists(carpeta):
@@ -96,7 +85,6 @@ def abrir_carpeta(nombre):
 
 
 def saludar_usuario():
- 
   hora = datetime.datetime.now().time()
 
   if hora.hour < 12:
@@ -113,29 +101,37 @@ def saludar_usuario():
 
 
 def escuchar_y_procesar():
- 
+  activado = False
+  palabra_clave = "estas ahi"
+  
   with sr.Microphone() as source:
   
     r.adjust_for_ambient_noise(source)
  
     print("Escuchando...")
-    audio = r.listen(source)
+    audio = r.listen(source,) 
  
     try:
     
       texto = r.recognize_google(audio, language="es-ES")
 
       print("Has dicho: " + texto)
+      
+      if activado:
+        if texto.lower() == palabra_clave.lower():
+          engine.say("si, aqui estoy.")
+          engine.runAndWait()
+          activado = False
+          time.sleep(3)
      
-      if "youtube" in texto.lower() or "reproduce" in texto.lower():
+      elif "youtube" in texto.lower():
       
         musica = texto.lower().split("youtube")[1].strip()
-        musica = texto.lower().split("reproduce")[1].strip()
         
         engine.say("Reproduciendo " + musica)
         engine.runAndWait()
       
-        print("Reproduciendo " + musica)
+        print("Reproduciendo " + musica, "en youtube")
         pywhatkit.playonyt(musica)
    
       elif "abrir word" in texto.lower() or "Cerrar word" in texto.lower():
@@ -211,7 +207,7 @@ def escuchar_y_procesar():
         
       elif "tiktok" in texto.lower():
         
-        webbrowser.open("C:/Users/Usuario/AppData/Local/Programs/TikTok/TikTok.exe")
+        webbrowser.open("https://www.tiktok.com/login?lang=es&redirect_url=https%3A%2F%2Fwww.tiktok.com%2Fupload%3Flang%3Des")
         engine.say("Abriendo tiktok")
         engine.runAndWait()
           
@@ -256,7 +252,7 @@ def escuchar_y_procesar():
       
         api_key = "ab613795bd25da5f26bb66bfcc72d475"
 
-        lugar = "Veracruz"
+        lugar = "castillo de teayo"
 
         url = f"http://api.openweathermap.org/data/2.5/weather?q={lugar}&appid={api_key}&units=metric&lang=es"
 
@@ -291,12 +287,17 @@ def escuchar_y_procesar():
         abrir_carpeta(nombre)
         engine.say(f"Abriendo la carpeta {nombre} en el explorador de archivos")
         engine.runAndWait()
-        
+              
       else:
         
-        engine.say("no he entendido lo que has dicho ")
-        engine.runAndWait()
-        print("No he entendido lo que has dicho")
+        if texto.lower() == palabra_clave.lower():
+          engine.say("Aquí estoy, ¿en qué puedo ayudarte?")
+          engine.runAndWait()
+          activado = True
+        else:
+          engine.say("no he entendido lo que has dicho ")
+          engine.runAndWait()
+          print("No he entendido lo que has dicho")
  
     except sr.UnknownValueError:
    
@@ -309,8 +310,8 @@ ventana = tk.Tk()
 ventana.title("Bot Project")
 ventana.geometry("300x250")
 
-imagen = Image.open("paisaje.jpg")
 
+imagen = Image.open("paisaje.jpg")
 foto = ImageTk.PhotoImage(imagen)
 
 marco = tk.Frame(ventana)
@@ -319,11 +320,26 @@ marco.pack()
 etiqueta = tk.Label(marco, image=foto)
 etiqueta.pack()
 
-boton = tk.Button(marco, text="Presiona para hablar", command=escuchar_y_procesar)
-boton_1 = tk.Button(marco, text="Ayuda", command=abrir_segunda)
+tamaño_icono = (45, 45) 
+icono_hablar_img = Image.open("Mic.png")
+icono_hablar_img = icono_hablar_img.resize(tamaño_icono, Image.ANTIALIAS)
+icono_hablar = ImageTk.PhotoImage(icono_hablar_img)
 
-boton.place(x=10, y=10)
-boton_1.place(x=10, y=50)
+icono_ayuda_img = Image.open("interrogacion.jpg")
+icono_ayuda_img = icono_ayuda_img.resize(tamaño_icono, Image.ANTIALIAS)
+icono_ayuda = ImageTk.PhotoImage(icono_ayuda_img)
+
+boton = tk.Button(marco, image=icono_hablar, command=escuchar_y_procesar)
+boton_1 = tk.Button(marco, image=icono_ayuda, command=abrir_segunda)
+
+boton.place(x=10, y=60)
+boton_1.place(x=230, y=180)
+
+etiqueta_hablar = tk.Label(marco, text="Presiona para hablar")
+#etiqueta_ayuda = tk.Label(marco, text="Ayuda")
+
+etiqueta_hablar.place(x=10, y=37)
+#etiqueta_ayuda.place(x=200, y=157)
 
 ventana.mainloop()
 
