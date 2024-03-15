@@ -55,4 +55,10 @@ Para entender un poco de contexto **Tkinter** es una liberia de interfaz grafica
 ***Es importante tener esto en cuenta para la instalacion***
 
 Ejecutar python `-m tkinter` desde la línea de comandos debería abrir una ventana que demuestre una interfaz Tk simple para saber si tkinter está instalado correctamente en su sistema. También muestra qué versión de Tcl/Tk está instalada para que pueda leer la documentación de Tcl/Tk específica de esa versión.
+
+
+
+# Instalacion de pyttsx3
+
+Para esto es muy simple como lo que es en el anterior pip install, en vez de que sea tkinter, sera `` 
  
