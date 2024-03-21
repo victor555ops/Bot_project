@@ -3,12 +3,11 @@ import webbrowser
 import tkinter as tk
 import pyttsx3
 import datetime 
-import requests 
+import requests #Para los URL
 import sys 
 import pywhatkit
 import os
 from PIL import ImageTk, Image
-import time
 
 r = sr.Recognizer()
 engine = pyttsx3.init()
@@ -27,9 +26,9 @@ print(obtener_hora())
 
 
 def abrir_segunda():
-  ventana.withdraw()
+  ventana.withdraw() 
   
-  ventana_segunda = tk.Toplevel()
+  ventana_segunda = tk.Toplevel() #ayuda a manejar mas ventanas despues de la primera
   ventana_segunda.title("Segunda ventana")
   ventana_segunda.geometry("550x300")
   imagen2 = Image.open("Sabana.jpg")
@@ -101,8 +100,6 @@ def saludar_usuario():
 
 
 def escuchar_y_procesar():
-  activado = False
-  palabra_clave = "estas ahi"
   
   with sr.Microphone() as source:
   
@@ -116,15 +113,8 @@ def escuchar_y_procesar():
       texto = r.recognize_google(audio, language="es-ES")
 
       print("Has dicho: " + texto)
-      
-      if activado:
-        if texto.lower() == palabra_clave.lower():
-          engine.say("si, aqui estoy.")
-          engine.runAndWait()
-          activado = False
-          time.sleep(3)
      
-      elif "youtube" in texto.lower():
+      if "youtube" in texto.lower():
       
         musica = texto.lower().split("youtube")[1].strip()
         
@@ -252,7 +242,7 @@ def escuchar_y_procesar():
       
         api_key = "ab613795bd25da5f26bb66bfcc72d475"
 
-        lugar = "castillo de teayo"
+        lugar = "veracruz"
 
         url = f"http://api.openweathermap.org/data/2.5/weather?q={lugar}&appid={api_key}&units=metric&lang=es"
 
@@ -287,14 +277,8 @@ def escuchar_y_procesar():
         abrir_carpeta(nombre)
         engine.say(f"Abriendo la carpeta {nombre} en el explorador de archivos")
         engine.runAndWait()
-              
-      else:
         
-        if texto.lower() == palabra_clave.lower():
-          engine.say("Aquí estoy, ¿en qué puedo ayudarte?")
-          engine.runAndWait()
-          activado = True
-        else:
+      else:
           engine.say("no he entendido lo que has dicho ")
           engine.runAndWait()
           print("No he entendido lo que has dicho")
@@ -307,9 +291,8 @@ def escuchar_y_procesar():
 
 
 ventana = tk.Tk()
-ventana.title("Bot Project")
+ventana.title("BotAssist")
 ventana.geometry("300x250")
-
 
 imagen = Image.open("paisaje.jpg")
 foto = ImageTk.PhotoImage(imagen)
@@ -322,11 +305,11 @@ etiqueta.pack()
 
 tamaño_icono = (45, 45) 
 icono_hablar_img = Image.open("Mic.png")
-icono_hablar_img = icono_hablar_img.resize(tamaño_icono, Image.ANTIALIAS)
+icono_hablar_img = icono_hablar_img.resize(tamaño_icono)
 icono_hablar = ImageTk.PhotoImage(icono_hablar_img)
 
 icono_ayuda_img = Image.open("interrogacion.jpg")
-icono_ayuda_img = icono_ayuda_img.resize(tamaño_icono, Image.ANTIALIAS)
+icono_ayuda_img = icono_ayuda_img.resize(tamaño_icono)
 icono_ayuda = ImageTk.PhotoImage(icono_ayuda_img)
 
 boton = tk.Button(marco, image=icono_hablar, command=escuchar_y_procesar)
