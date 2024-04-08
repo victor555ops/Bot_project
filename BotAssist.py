@@ -13,7 +13,7 @@ r = sr.Recognizer()
 engine = pyttsx3.init()
 
 engine.setProperty("language", "es-ES")
-engine.setProperty("rate", 145)
+engine.setProperty("rate", 140)
 
 
 def obtener_hora():
@@ -25,33 +25,11 @@ def obtener_hora():
 print(obtener_hora())
 
 
-def abrir_segunda():
-  ventana.withdraw() 
-  
-  ventana_segunda = tk.Toplevel() #ayuda a manejar mas ventanas despues de la primera
-  ventana_segunda.title("Segunda ventana")
-  ventana_segunda.geometry("550x300")
-  imagen2 = Image.open("Sabana.jpg")
-
-  foto2 = ImageTk.PhotoImage(imagen2)
-  
-  marco = tk.Frame(ventana)
-  marco.pack()
-  
-  etiqueta = tk.Label(marco, image=foto2)
-  etiqueta.pack()
-   
-  etiqueta_2 = tk.Label(ventana_segunda, text="Bienvenido a la seccion de ayuda.\nEste programa puede hacer lo siguiente con solo picar el boton de hablar:\n- Abrir la paqueteria de office. Por ejemplo: Word.\n- Te dira la hora, fecha y estado del clima.\n- Reproduce videos en youtube.\n- Abrir google o hacer la busqueda por ti, solo tienes que pedirle tu busqueda.\nhacer preguntas interactivas.\n-por ultimo, puedes cerrar el programa diciendo cerrar programa.\n si quieres volver a la primera ventana, preciona el boton de abajo")
-  etiqueta_2.pack()
-
-  boton_2 = tk.Button(ventana_segunda, text="Volver a la primera ventana", command=lambda: volver_primera(ventana, ventana_segunda))
-  boton_2.pack()
-
-
-def volver_primera(ventana, ventana_segunda): 
-  ventana.deiconify()
-  ventana_segunda.destroy()
-
+def abrir_ayuda():
+  imagen = Image.open('Ayuda.png')  
+  imagen.show()
+  engine.say("Esta imagen muestra todas las tareas o acciones que puede realizar el bot, al precionar el icono del microfono usted puede mencionar Abrir word y se realizara una accion")
+  engine.runAndWait()
 
 
 def obtener_fecha():
@@ -87,11 +65,11 @@ def saludar_usuario():
   hora = datetime.datetime.now().time()
 
   if hora.hour < 12:
-    saludo = "Hasta Pronto, que tenga un excelente dia, si necesita ayuda, no dude en contactarme"
+    saludo = "Hasta Pronto, que tenga un excelente día, si necesita ayuda, no dude en contactarme"
   elif hora.hour < 18:
     saludo = "Hasta pronto, que tenga una excelente tarde, si necesita ayuda, no dude en contactarme"
   else:
-    saludo = "Hasta pronto, que tenga una linda noche, si necesita ayuda no dude en contactarme"
+    saludo = "Hasta pronto, que tenga una excelente noche, si necesita ayuda, no dude en contactarme"
   
   engine.say(saludo)
   engine.runAndWait()
@@ -102,11 +80,9 @@ def saludar_usuario():
 def escuchar_y_procesar():
   
   with sr.Microphone() as source:
-  
     r.adjust_for_ambient_noise(source)
- 
     print("Escuchando...")
-    audio = r.listen(source,) 
+    audio = r.listen(source,)
  
     try:
     
@@ -272,7 +248,13 @@ def escuchar_y_procesar():
         engine.say(f"Creando la carpeta {nombre} en el escritorio")
         engine.runAndWait()
         
-      elif "Abrir carpeta" in texto.lower():
+        imagen = Image.open('infografia.jpg')  
+        imagen.show()
+        engine.say("Esta imagen muestra los pasos a seguir para la creación de una carpeta manualmente")
+        engine.runAndWait()
+       
+        
+      elif "abrir carpeta" in texto.lower():
         nombre = texto.split()[-1]
         abrir_carpeta(nombre)
         engine.say(f"Abriendo la carpeta {nombre} en el explorador de archivos")
@@ -313,7 +295,7 @@ icono_ayuda_img = icono_ayuda_img.resize(tamaño_icono)
 icono_ayuda = ImageTk.PhotoImage(icono_ayuda_img)
 
 boton = tk.Button(marco, image=icono_hablar, command=escuchar_y_procesar)
-boton_1 = tk.Button(marco, image=icono_ayuda, command=abrir_segunda)
+boton_1 = tk.Button(marco, image=icono_ayuda, command=abrir_ayuda)
 
 boton.place(x=10, y=60)
 boton_1.place(x=230, y=180)
@@ -327,3 +309,8 @@ etiqueta_hablar.place(x=10, y=37)
 ventana.mainloop()
 
 saludar_usuario()
+
+
+
+
+#Sistema de gestión de pedidos para una tienda en línea.
