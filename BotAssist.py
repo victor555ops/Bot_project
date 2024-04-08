@@ -309,8 +309,3 @@ etiqueta_hablar.place(x=10, y=37)
 ventana.mainloop()
 
 saludar_usuario()
-
-
-
-
-#Sistema de gestión de pedidos para una tienda en línea.
