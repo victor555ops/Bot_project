@@ -15,7 +15,14 @@ engine = pyttsx3.init()
 engine.setProperty("language", "es-ES")
 engine.setProperty("rate", 140)
 
+api_key = "ab613795bd25da5f26bb66bfcc72d475"
 
+def obtener_clima(ciudad):
+  url = f'http://api.openweathermap.org/data/2.5/weather?q={ciudad}&appid={api_key}'
+  respuesta = requests.get(url)
+  datos_clima = respuesta.json()
+  print(datos_clima)
+  
 def obtener_hora():
   hora = datetime.datetime.now().time()
 
@@ -213,30 +220,28 @@ def escuchar_y_procesar():
         engine.say("Claro, es un placer atenderte")
         engine.runAndWait()
       
-      elif "clima" in texto.lower() or "tiempo" in texto.lower():
+      elif "clima" in texto.lower():
 
-      
+        audio = r.recognize_google(audio, language='es-ES')
         api_key = "ab613795bd25da5f26bb66bfcc72d475"
-
-        lugar = "veracruz"
-
-        url = f"http://api.openweathermap.org/data/2.5/weather?q={lugar}&appid={api_key}&units=metric&lang=es"
-
+        
+        ciudad = texto.lower().split(' ')[-1].strip() 
+        url = f"http://api.openweathermap.org/data/2.5/weather?q={ciudad}&appid={api_key}&units=metric&lang=es"
         respuesta = requests.get(url)
-
         datos = respuesta.json()
-
-        print(f"El clima en {lugar} es {datos['weather'][0]['description']}")
-        print(f"La temperatura actual es {datos['main']['temp']} °C")
-        print(f"La humedad relativa es {datos['main']['humidity']} %")
-        print(f"La presión atmosférica es {datos['main']['pressure']} hPa")
-
-        engine.say(f"El clima en {lugar} es {datos['weather'][0]['description']}")
-        engine.say(f"La temperatura actual es {datos['main']['temp']} grados centígrados")
-        engine.say(f"La humedad relativa es {datos['main']['humidity']} por ciento")
-        engine.say(f"La presión atmosférica es {datos['main']['pressure']} hectopascales")
-        engine.runAndWait()
       
+        if 'weather' in datos:
+            print(f"El clima en {ciudad} es {datos['weather'][0]['description']}")
+            print(f"La temperatura actual es {datos['main']['temp']} °C")
+            print(f"La humedad relativa es {datos['main']['humidity']} %")
+            print(f"La presión atmosférica es {datos['main']['pressure']} hPa")
+
+            engine.say(f"El clima en {ciudad} es {datos['weather'][0]['description']}")
+            engine.say(f"La temperatura actual es {datos['main']['temp']} grados centígrados")
+            engine.say(f"La humedad relativa es {datos['main']['humidity']} por ciento")
+            engine.say(f"La presión atmosférica es {datos['main']['pressure']} hectopascales")
+            engine.runAndWait()
+            
       elif "abrir explorador" in texto.lower() or "abre explorador" in texto.lower():
         abrir_explorador()
         engine.say("Abriendo tu explorador de archivos")
@@ -261,9 +266,10 @@ def escuchar_y_procesar():
         engine.runAndWait()
         
       else:
-          engine.say("no he entendido lo que has dicho ")
-          engine.runAndWait()
-          print("No he entendido lo que has dicho")
+        
+        engine.say("no he entendido lo que has dicho ")
+        engine.runAndWait()
+        print("No he entendido lo que has dicho")
  
     except sr.UnknownValueError:
    
@@ -275,6 +281,7 @@ def escuchar_y_procesar():
 ventana = tk.Tk()
 ventana.title("BotAssist")
 ventana.geometry("300x250")
+
 
 imagen = Image.open("paisaje.jpg")
 foto = ImageTk.PhotoImage(imagen)
