@@ -140,6 +140,9 @@ En esta seccion es importante reconocer que es lo que es en si, es una librería
 
 `pip install PyAudio`
 
+De esta forma ya puede utilizar nuestro programa con sus librerias ya integradas y de esta forma no tendra ningun error en nuestro codigo.
+.
+
 
 
 
