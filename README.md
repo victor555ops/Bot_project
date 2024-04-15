@@ -135,6 +135,14 @@ Para instalar todas las librerías a la vez, puedes ejecutar:
 
 De esta forma se instalara todas las librerias sin ningun problema..
 
+### PyAudio 🎤
+En esta seccion es importante reconocer que es lo que es en si, es una librería multiplataforma de entrada/salida de audio. Con PyAudio, podemos fácilmente utilizar Python para reproducir, grabar o procesar entradas de audio en tiempo real, ya que esta libreria reconoce lo que es el audio y el procesamiento de reconocimiento de voz, en este apartado haces lo mismo como con los pases anteriores de copiar y pegar la seccion de pip y lo pegas en cmd, de esta forma ya todas las librerias estaran ya en su sistema y de esta forma podra ocupar nuestro BotAssist y asi puede usarla para funciones basicas en su vida cotidiana.
+
+`pip install PyAudio`
+
+
+
+
 
 
  
